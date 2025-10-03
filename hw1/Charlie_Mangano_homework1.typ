@@ -44,3 +44,5 @@
 
 #question[Construct $2 times 2$ matrix $Zhat$, the eigenvectors of which are $zeroket$ and $oneket$ and the corresponding eigenvalues are $+1$ and $-1$. That is $Zhat zeroket = +1zeroket$ and $Zhat oneket = -1oneket$.]
 
+Let $  $
+
