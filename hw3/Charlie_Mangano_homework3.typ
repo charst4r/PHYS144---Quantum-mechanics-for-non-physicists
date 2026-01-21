@@ -663,6 +663,134 @@ $ braket(B_0, ZZ_A ZZ_B, B_0) &= 1/2 (bra(01) - bra(10)) ZZ_A ZZ_B (ket(01) - ke
 
 #question[Show that person A measuring $ZZ_A$ would find $Z_A$ = +1 with a probability $1/2$ and $Z_Z = -1$ with a probability $1/2$. However, every time person A measures $Z_A = +1$, person B afterwards measures $ZZ_B = +1$ as well.]
 
+We have:
+$ ket(B_3) &= 1/sqrt(2) ket(00) + 1/sqrt(2) ket(11) \
+&= psi_00 ket(00) + psi_11 ket(11) $
+$ => "probability" = abs(psi_00)^2 = abs(psi_11)^2 = 1/2 $
+
+Therefore, measuring $ZZ_A$ on $ket(B_3)$, we get $plus.minus 1$ with probability $1/2$ ($plus.minus$ 1 are the eigenvalues for $ket(00), ket(11)$ and $ket(01), ket(10)$ respectively).
+
+When measuring $plus 1$, we know for sure that $ket(B_3)$ collapses onto $ket(00)$, so qubit B is in $ket(0_B)$, so measuring $ZZ_b$ would output $+1$ with probability $1$.
+
+#answer[See above.]
+
+
+#question[Person A measures $XX_A$ and right aftewards person B measures $ZZ_B$. Show that now every time person A measures $XX_A = +1$, person B measures $Z_A = +1$ with a probability $1/2$ and $Z_A = -1$ also with a probability $1/2$.]
+
+We rewrite $ket(00), ket(11)$ to have qubit A in the $XX$ basis:
+#columns(2)[
+	$ ket(0) = 1/sqrt(2) (ket(+) + ket(-)) $
+
+	#colbreak()
+
+	$ ket(1) = 1/sqrt(2) (ket(+) - ket(-)) $
+]
+
+So:
+
+#columns(2)[
+	$ ket(00) &= 1/sqrt(2) (ket(+) + ket(-)) tensor ket(0) \
+	&= 1/sqrt(2) (ket(+0) + ket(-0)) $
+
+	#colbreak()
+
+	$ ket(11) &= 1/sqrt(2) (ket(+) - ket(-)) tensor ket(1) \
+	&= 1/sqrt(2) (ket(+1) - ket(-1)) $
+]
+
+And we get:
+$ ket(B_3) = 1/2 (ket(+0) + ket(-0) + ket(+1) - ket(-1)) $
+
+Person A measures $X_A = +1$, $ket(B_3)$ collapses onto $ket(++)$. Person B measures $ZZ_B$ on that collapsed state ($ket(+_B) = 1/sqrt(2) (ket(0) + ket(1))$) and can get $plus.minus 1$ with probability $1/2$. 
+
+#answer[See above.]
+
+
+= Deteministic creation of entanglement
+
+#question[Consider the two-qubit dynamics according to the Hamiltonian Eq 3. Consider an initial state $ket(Psi(t = 0)) = ket(01), ket(10)$. Show that for both cases nothing happens.]
+
+Since $g << omega_(1,2)$, we have:
+#columns(2)[
+	$HH ket(00) &= -1/2 omega_1 ZZ_A ket(00) - 1/2 omega_2 ZZ_B ket(00) + g XX ket(00) \
+	&= -1/2 omega_1 ZZ_A ket(00) - 1/2 omega_2 ZZ_B ket(00) + g ket(11) \
+	&approx -1/2 omega_1 ZZ_A ket(00) - 1/2 omega_2 ZZ_B ket(00) \
+	&= -2 pi ket(00) $
+
+	#colbreak()
+
+	$HH ket(00) &= -1/2 omega_1 ZZ_A ket(11) - 1/2 omega_2 ZZ_B ket(11) + g XX ket(11) \
+	&= 1/2 omega_1 ZZ_A ket(11) + 1/2 omega_2 ZZ_B ket(11) + g ket(00) \
+	&approx 1/2 omega_1 ZZ_A ket(11) + 1/2 omega_2 ZZ_B ket(11) \
+	&= 2 pi ket(11) $
+]
+
+So both stay in the same state (up to a factor).
+
+#answer[See above.]
+
+
+#question[Consider an initial state $ket(Psi(t = 0)) = ket(01), ket(10)$. Show that these two states oscillate into one another with a period given by $(2 pi)/g$.]
+
+We have:
+#columns(2)[
+	$ HH ket(01) &= - 1/2 omega_1 ket(01) + 1/2 omega_2 ket(01) + g ket(10) \
+	&= - pi ket(01) + pi ket(01) + g ket(10) \
+	&= g ket(10) $
+
+	#colbreak()
+
+	$ HH ket(10) &= - 1/2 omega_1 ket(10) + 1/2 omega_2 ket(10) + g ket(10) \
+	&= + pi ket(10) - pi ket(10) + g ket(01) \
+	&= g ket(01) $
+]
+
+So the period is given by $(2 pi)/g$.
+
+#answer[See above.]
+
+
+#question[Consider the initial state $ket(01)$ and show that at time $t = 1/2 dot (2 pi)/g$, the state is $ket(01) + i ket(10)$ up to a normalization factor. Likewise, start with $ket(10)$ and show that that one evolves into $ket(01) - i ket(10)$.]
+
+We have:
+$ HH ket(01) = g ket(10)\
+HH ket(10) = g ket(01) $
+
+TODO
+
+#answer[See above.]
+
+
+#question[Propose a single-qubit operator which would convert the state $ket(01) + i ket(10)$ into one of the Bell states.]
+
+We use:
+$ MM = 1/sqrt(2) dmat(1, i) $
+
+So:
+$ MM ket(0) = 1/sqrt(2) ket(0) $
+$ MM ket(1) = i/sqrt(2) ket(1) $
+
+We apply it to the given state:
+$ MM (ket(01) + i ket(10)) &= MM ket(01) + i MM ket(10) \
+&= i/2 ket(01) - 1/2 ket(10) $
+
+#answer[$MM = dmat(1, i)$]
+
+
+#question[Express the $2 times 2$ matrix for $HH$ in the basis of states $ket(01)$ and $ket(10)$. What combination of Pauli operators is it?]
+
+We have;
+$ HH &= -1/2 omega_1 ZZ_1 - 1/2 omega_2 ZZ_2 + g XX_1 XX_2 \
+&= dmat(-1/2 omega_1 - 1/2 omega_2, 1/2 omega_1 + 1/2 omega_2) + admat(g, g) \
+&= mat(-1/2 omega_1 - 1/2 omega_2, g; g, 1/2 omega_1 + 1/2 omega_2) \
+&= (-1/2 omega_1 - 1/2 omega_2) ZZ + g XX $
+
+#answer[$HH = (-1/2 omega_1 - 1/2 omega_2) ZZ + g XX $]
+
+
+
+
+
 
 
 
